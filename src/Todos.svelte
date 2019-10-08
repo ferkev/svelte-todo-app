@@ -25,7 +25,7 @@
 
   /**
    * @desc : function for adding task
-   * @param: {event} e - the event when keydown enter
+   * @param: {event} e - the event when keydown enter is down
    **/
   const addTodo = e => {
     if (e.key === "Enter") {
@@ -33,6 +33,13 @@
       newTodoTitle = "";
     }
   };
+
+
+  const updateFilter = newFilter => {
+   currentFilter = newFilter
+  };
+
+
 </script>
 
 <style>
@@ -118,7 +125,7 @@
       <button on:click={() => updateFilter('completed')} class:active="{currentFilter === 'completed'}">Completed</button>
     </div>
     <dir>
-      <button>Clear Completed</button>
+      <button on:click={clearCompleted}>Clear Completed</button>
     </dir>
   </div>
 
