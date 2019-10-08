@@ -60,19 +60,32 @@
     todos = todos;
   };
 
+  /**
+   * @desc: clear completed tasks
+   **/
   const clearCompleted = () => {
     todos = todos.filter(todo => !todo.completed);
   };
 
+  /**
+   * @desc: delete task which are completed
+   * @param: {event} e - event on click
+   **/
   const handleDeleteTodo = e => {
     todos = todos.filter(todo => todo.id !== e.detail.id);
   };
 
+  /**
+   * @desc: complete task are displaying completed
+   * @param: {event} e - event on click
+   **/
   const handleToggleComplete = e => {
+    // find todo index
     const todoIndex = todos.findIndex(todo => {
       return todo.id === e.detail.id;
     });
 
+    // actualize the todos array
     const updatesTodo = {...todos[todoIndex], completed: !todos[todoIndex].completed};
     todos = [
       ...todos.slice(0, todoIndex),
@@ -81,7 +94,10 @@
     ];
   };
 
+  // update the dom for remaining task count
   $: todosRemaining = filteredTodos.filter(todo => !todo.completed).length;
+
+  // filter for displaying todos
   $: filteredTodos = currentFilter === "all" ? todos : currentFilter === "completed"
       ? todos.filter(todo => todo.completed)
       : todos.filter(todo => !todo.completed);
